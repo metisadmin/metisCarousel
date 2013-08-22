@@ -1,0 +1,202 @@
+/*
+The MIT License
+
+Copyright 2013 ono.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+
+/* 
+    Created on : Aug 22, 2013, 11:21:22 PM
+    Author     : ono
+*/
+
+
+// VARIABLES //
+
+// COLORS //
+
+@color1             : #c60063;
+
+@color2             : #606028;
+
+@color3             : #B78114;
+
+@color4             : #5B73A3;
+
+@color5             : #5B8BA3;
+
+@color6             : #45C7EB;
+
+// MIXINS //
+
+
+// Functions
+.transition(@transition) {
+    animation-delay: @transition;
+    -moz-animation-delay: @transition;
+    -webkit-animation-delay: @transition;
+}
+.bgColor(@color;@num){
+    background-color: ~"@{@{color}@{num}}";
+}
+.setColor(@color;@num){
+    color: ~"@{@{color}@{num}}";
+}
+.height(@height:0) {
+    height:unit(@height,px);
+}
+.width(@width:0){
+    width: unit(@width,px);
+}
+.size(@width; @height){
+    .width(@width);
+    .height(@height);
+}
+.square(@dim){
+    .size(@dim;@dim);
+}
+
+// Loop
+
+.transitionLoop(@sayi:1) when (@sayi < 11){
+    .adl-@{sayi} {
+        .transition(unit(@sayi / 10, s));
+    }
+    .transitionLoop(@sayi + 1);
+}
+
+
+.bgLoop (@sayi:1) when (@sayi < 7) {
+    .bg-@{sayi} {
+        .bgColor(~"color";@sayi);
+    }
+    .bgLoop(@sayi + 1);
+}
+
+.colorLoop (@sayi:1) when (@sayi < 7){
+    .cl-@{sayi} {
+        .setColor(~"color";@sayi);
+    }
+    .colorLoop(@sayi + 1);
+}
+.padLoop (@num:10) when (@num < 110){
+    .pad-top-@{num}  {
+        padding-top: unit(@num,px);
+    }
+    .pad-rig-@{num}  {
+        padding-right: unit(@num,px);
+    }
+    .pad-bot-@{num}  {
+        padding-bottom: unit(@num,px);
+    }
+    .pad-lef-@{num}  {
+        padding-left: unit(@num,px);
+    }
+    .pad-@{num}  {
+        padding: unit(@num,px);
+    }
+    .padLoop(@num + 10);
+}
+.marLoop (@num:5) when (@num < 110){
+    .mar-top-@{num}  {
+        margin-top: unit(@num,px);
+    }
+    .mar-rig-@{num}  {
+        margin-right: unit(@num,px);
+    }
+    .mar-bot-@{num}  {
+        margin-bottom: unit(@num,px);
+    }
+    .mar-lef-@{num}  {
+        margin-left: unit(@num,px);
+    }
+    .mar-@{num}  {
+        margin: unit(@num,px);
+    }
+    .marLoop(@num + 5);
+}
+.fontLoop(@num:5) when (@num < 110) {
+    .font-@{num} {
+        font-size: unit(@num, px);
+    }
+    .fontLoop(@num + 5);
+}
+.percent(@num:0) when (@num < 510) {
+    .top-@{num} {
+        top:unit(@num,px);
+    }
+    .lef-@{num} {
+        left:unit(@num,px);
+    }
+    .bot-@{num} {
+        bottom:unit(@num,px);
+    }
+    .rig-@{num} {
+        right:unit(@num,px);
+    }
+    .percent(@num + 10);
+}
+.dimLoop(@num:0) when (@num < 510){
+    .wid-@{num} {
+        .width(@num);
+    }
+    .heig-@{num} {
+        .height(@num);
+    }
+    .sqr-@{num}{
+        .square(@num);
+    }
+    
+    
+    .dimLoop(@num + 10);
+}
+/*
+TRANSITION
+*/
+.transitionLoop();
+/*
+Background Color
+*/
+.bgLoop();
+
+/*
+Font Color
+*/
+.colorLoop();
+
+.padLoop();
+.marLoop();
+.fontLoop();
+.percent();
+.dimLoop();
+
+.cl-white {
+    color: #fff;
+}
+.bg-white {
+    background-color: #fff;
+}
+.pos-rel {
+    position: relative;
+}
+.pos-ab {
+    position: absolute;
+}
